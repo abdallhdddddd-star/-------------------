@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أسماك الحوراني - المنيو الفاخر ولوحة التحكم</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0077b6;
+            --primary-dark: #03045e;
+            --secondary: #00b4d8;
+            --accent: #ffb703;
+            --accent-glow: rgba(255, 183, 3, 0.4);
+            --bg: #0b132b;
+            --card-bg: rgba(28, 37, 65, 0.85);
+            --surface: #1c2541;
+            --text-light: #ffffff;
+            --text-muted: #a0aec0;
+            --border: rgba(255, 255, 255, 0.12);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-light);
+            padding-bottom: 120px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 119, 182, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 183, 3, 0.1) 0%, transparent 40%);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(11, 19, 43, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--text-light);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .brand-logo i {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .admin-switch-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-switch-btn:hover {
+            background: var(--surface);
+            border-color: var(--secondary);
+        }
+
+        .top-cart-btn {
+            background: linear-gradient(135deg, var(--accent), #f77f00);
+            color: #000;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        /* Hero Banner */
+        .hero {
+            position: relative;
+            padding: 3.5rem 1.5rem 2.5rem;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 119, 182, 0.35) 0%, rgba(11, 19, 43, 0) 100%);
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(to right, #ffffff, var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Controls */
+        .controls-container {
+            max-width: 1000px;
+            margin: 0 auto 2rem;
+            padding: 0 1.5rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            background: rgba(28, 37, 65, 0.8);
+            border: 1px solid var(--border);
+            padding: 1rem 3rem 1rem 1.2rem;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .categories {
+            display: flex;
+            gap: 0.8rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+        }
+
+        .cat-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Menu Grid */
+        .menu-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .item-img-wrapper {
+            position: relative;
+            height: 210px;
+            background: #111;
+        }
+
+        .item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tag-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(11, 19, 43, 0.85);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        .item-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .item-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .item-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-num {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .add-cart-btn {
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-cart-btn:hover {
+            background: var(--secondary);
+            color: #000;
+        }
+
+        /* Sticky Bottom Cart Bar */
+        .cart-bar {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 3rem);
+            max-width: 800px;
+            background: rgba(28, 37, 65, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 180, 216, 0.4);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .cart-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-badge {
+            background: var(--accent);
+            color: black;
+            font-weight: 900;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+
+        .checkout-trigger {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 1rem;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 550px;
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 0.8rem;
+        }
+
+        .form-group {
+            margin-top: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            background: rgba(11, 19, 43, 0.6);
+            border: 1px solid var(--border);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .send-wa-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-top: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ADMIN DASHBOARD STYLES */
+        .admin-view {
+            display: none;
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-info h4 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .stat-info span {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .admin-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.8rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+        }
+
+        .admin-section h3 {
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-delete {
+            background: #e63946;
+            color: white;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand-logo" onclick="switchView('customer')">
+            <i class="fa-solid fa-fish-fins"></i>
+            <span>أسماك الحوراني</span>
+        </div>
+        <div class="nav-actions">
+            <button class="admin-switch-btn" id="view-toggle-btn" onclick="toggleAdminView()">
+                <i class="fa-solid fa-user-shield"></i> لوحة التحكم
+            </button>
+            <button class="top-cart-btn" id="cart-nav-btn" onclick="openCart()">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span>السلة</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CUSTOMER VIEW -->
+    <div id="customer-view">
+        <!-- Hero Banner -->
+        <header class="hero">
+            <h1>طازج من البحر.. لترابيزتك مباشرة 🐟</h1>
+            <p>اختر ما تشتهيه من أطيب المأكولات البحرية واطلب مباشرة عبر الواتساب</p>
+        </header>
+
+        <!-- Controls -->
+        <div class="controls-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="ابحث عن صنف معين (جمبري، بوري، طاجن...)" oninput="handleSearch()">
+            </div>
+
+            <div class="categories">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">الكل</button>
+                <button class="cat-btn" onclick="filterCategory('fish', this)">أسماك بالأوزان</button>
+                <button class="cat-btn" onclick="filterCategory('tajin', this)">طواجن وشوربة</button>
+                <button class="cat-btn" onclick="filterCategory('meals', this)">وجبات وسندوتشات</button>
+            </div>
+        </div>
+
+        <!-- Menu Grid -->
+        <main class="menu-container">
+            <div class="menu-grid" id="menu-grid">
+                <!-- Dynamically loaded -->
+            </div>
+        </main>
+
+        <!-- Sticky Cart Bar -->
+        <div class="cart-bar" id="cart-bar">
+            <div class="cart-info">
+                <i class="fa-solid fa-cart-shopping" style="color: var(--secondary); font-size: 1.3rem;"></i>
+                <div>
+                    <span class="cart-badge" id="cart-badge">0</span>
+                    <span style="font-weight: 800; color: var(--accent); margin-right: 0.5rem;" id="cart-total">0 ج.م</span>
+                </div>
+            </div>
+            <button class="checkout-trigger" onclick="openCart()">
+                <span>تأكيد الطلب</span>
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD VIEW -->
+    <div class="admin-view" id="admin-view">
+        <h2 style="margin-bottom: 1.5rem; color: var(--accent);"><i class="fa-solid fa-chart-line"></i> لوحة إدارة مطعم أسماك الحوراني</h2>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                <div class="stat-info">
+                    <h4>إجمالي إيراد اليوم</h4>
+                    <span id="stat-revenue">0 ج.م</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+                <div class="stat-info">
+                    <h4>عدد طلبات اليوم</h4>
+                    <span id="stat-orders-count">0</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-utensils"></i></div>
+                <div class="stat-info">
+                    <h4>إجمالي المنتجات بالمنيو</h4>
+                    <span id="stat-products-count">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add New Product Form -->
+        <div class="admin-section">
+            <h3><i class="fa-solid fa-plus-circle"></i> إضافة منتج جديد للمنيو</h3>
+            <form id="add-product-form" onsubmit="addNewProduct(event)">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label>اسم المنتج:</label>
+                        <input type="text" id="prod-name" required placeholder="مثال: دنيس مشوي بالردة">
+                    </div>
+                    <div class="form-group">
+                        <label>السعر (بالجنيه):</label>
+                        <input type="number" id="prod-price" required placeholder="مثال: 320">
+                    </div>
+                    <div class="form-group">
+                        <label>القسم:</label>
+                        <select id="prod-category">
+                            <option value="fish">أسماك بالأوزان</option>
+                            <option value="tajin">طواجن وشوربة</option>
+                            <option value="meals">وجبات وسندوتشات</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>رابط الصورة (URL):</label>
+                        <input type="url" id="prod-img" required placeholder="https://images.unsplash.com/...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>الوصف:</label>
+                    <textarea id="prod-desc" rows="2" placeholder="وصف قصير للطبق والمكونات"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">إضافة المنتج للمنيو فوراً</button>
+            </form>
+        </div>
+
+        <!-- Manage Products Table -->
+        <div class="admin-section">
+            <h3><i class="fa-solid fa-boxes-stacked"></i> إدارة أصناف المنيو الحالية</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الصورة</th>
+                            <th>الاسم</th>
+                            <th>القسم</th>
+                            <th>السعر</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-products-table">
+                        <!-- Loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Orders History -->
+        <div class="admin-section">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> سجل طلبات اليوم المباشرة</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>رقم الطلب</th>
+                            <th>العميل</th>
+                            <th>العنوان</th>
+                            <th>الإجمالي</th>
+                            <th>الوقت</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-orders-table">
+                        <!-- Loaded via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Order Cart -->
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-receipt"></i> تفاصيل الطلب</h3>
+                <button class="close-btn" onclick="closeCart()">&times;</button>
+            </div>
+
+            <div id="cart-items-list">
+                <!-- Cart Items -->
+            </div>
+
+            <div class="form-group">
+                <label>الاسم بالكامل:</label>
+                <input type="text" id="cust-name" placeholder="مثال: محمد السيد">
+            </div>
+
+            <div class="form-group">
+                <label>عنوان التوصيل بالتفصيل:</label>
+                <textarea id="cust-address" rows="2" placeholder="اسم الشارع، رقم العمارة، رقم الشقة"></textarea>
+            </div>
+
+            <button class="send-wa-btn" onclick="sendToWhatsApp()">
+                إرسال الطلب فوراً للواتساب <i class="fa-brands fa-whatsapp"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Engine -->
+    <script>
+        // Initial Default Data
+        const defaultProducts = [
+            {
+                id: 1,
+                name: 'سمك بوري سنجاري إسكندراني',
+                category: 'fish',
+                price: 240,
+                desc: 'بوري بلدي طازج مفتوح سنجاري ومخبوز بالخضراوات والبهارات.',
+                tag: 'الأكثر طلباً 🔥',
+                img: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 2,
+                name: 'جمبري جامبو مشوي بصوص الزبدة',
+                category: 'fish',
+                price: 550,
+                desc: 'جمبري جامبو طازج مشوي بخلطة الثوم والزبدة والليمون.',
+                tag: 'مميز ⭐',
+                img: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 3,
+                name: 'سمك بولطي بلدي مقلي مقرمش',
+                category: 'fish',
+                price: 130,
+                desc: 'بولطي مقلي مقرمش متبل بثوم وكمون وخلطة الحوراني.',
+                tag: 'بلدي أصيل',
+                img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 4,
+                name: 'طاجن سي فود فاخر بالكريمة والجبنة',
+                category: 'tajin',
+                price: 210,
+                desc: 'جمبري وسبيط وقطع سمك مخلية بصوص الكريمة الغني والموتزاريلا.',
+                tag: 'جديد 🌟',
+                img: 'https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 5,
+                name: 'شوربة سي فود ملوكي',
+                category: 'tajin',
+                price: 125,
+                desc: 'شوربة سي فود غنية بكابوريا وجمبري وسبيط وقطع فيليه.',
+                tag: 'موصى به',
+                img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 6,
+                name: 'وجبة الحوراني الميكس',
+                category: 'meals',
+                price: 185,
+                desc: 'سمكة بولطي + جمبري + سبيط + أرز صيدية + سلطة وطحينة.',
+                tag: 'قيمة ممتازة',
+                img: 'https://images.unsplash.com/photo-1510130318145-ad62c65b077f?auto=format&fit=crop&w=600&q=80'
+            }
+        ];
+
+        // Load Products & Orders from LocalStorage or Use Defaults
+        let products = JSON.parse(localStorage.getItem('alhourani_products')) || defaultProducts;
+        let orders = JSON.parse(localStorage.getItem('alhourani_orders')) || [];
+        let cart = [];
+        let currentCategory = 'all';
+        let isAdminLoggedIn = false;
+
+        // Render Customer Menu
+        function renderMenu(items) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">لا توجد أصناف حالياً في هذا القسم.</p>`;
+                return;
+            }
+
+            items.forEach(item => {
+                grid.innerHTML += `
+                    <div class="item-card">
+                        <div class="item-img-wrapper">
+                            <img src="${item.img}" alt="${item.name}" class="item-img" onerror="this.src='https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80'">
+                            ${item.tag ? `<span class="tag-badge">${item.tag}</span>` : ''}
+                        </div>
+                        <div class="item-content">
+                            <div>
+                                <h3 class="item-title">${item.name}</h3>
+                                <p class="item-desc">${item.desc}</p>
+                            </div>
+                            <div class="item-bottom">
+                                <span class="price-num">${item.price} ج.م</span>
+                                <button class="add-cart-btn" onclick="addToCart(${item.id})">
+                                    <i class="fa-solid fa-plus"></i> إضافـة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Filter Categories & Search
+        function filterCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            applyFilters();
+        }
+
+        function handleSearch() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            let filtered = products;
+
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(i => i.category === currentCategory);
+            }
+
+            if (query !== '') {
+                filtered = filtered.filter(i => i.name.toLowerCase().includes(query) || i.desc.toLowerCase().includes(query));
+            }
+
+            renderMenu(filtered);
+        }
+
+        // Cart Actions
+        function addToCart(id) {
+            const item = products.find(i => i.id === id);
+            const exist = cart.find(i => i.id === id);
+
+            if (exist) {
+                exist.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
+            const totalPrice = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+
+            document.getElementById('cart-badge').innerText = totalQty;
+            document.getElementById('cart-total').innerText = `${totalPrice} ج.م`;
+        }
+
+        function openCart() {
+            if (cart.length === 0) {
+                alert('السلة فارغة! اضف بعض الأطباق أولاً.');
+                return;
+            }
+
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = '';
+
+            cart.forEach(item => {
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <div style="font-size: 0.85rem; color: var(--accent);">${item.price} ج.م × ${item.qty} = ${item.price * item.qty} ج.م</div>
+                        </div>
+                        <div>
+                            <button onclick="changeQty(${item.id}, -1)" style="padding: 0.2rem 0.6rem;">-</button>
+                            <span style="margin: 0 0.5rem;">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" style="padding: 0.2rem 0.6rem;">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cart-modal').style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+            if (cart.length === 0) closeCart();
+            else openCart();
+        }
+
+        // WhatsApp Checkout & Record Order for Admin
+        function sendToWhatsApp() {
+            const name = document.getElementById('cust-name').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (!name || !address) {
+                alert('برجاء كتابة الاسم والعنوان بالتفصيل.');
+                return;
+            }
+
+            const totalPrice = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+
+            // Record order in Admin Ledger
+            const newOrder = {
+                id: '#' + Math.floor(1000 + Math.random() * 9000),
+                customer: name,
+                address: address,
+                total: totalPrice,
+                time: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })
+            };
+
+            orders.unshift(newOrder);
+            localStorage.setItem('alhourani_orders', JSON.stringify(orders));
+
+            // Send to WhatsApp
+            const phone = "201114554499";
+            let text = `🌊 *طلب جديد - أسماك الحوراني* 🌊\n\n`;
+            text += `👤 *الاسم:* ${name}\n`;
+            text += `📍 *العنوان:* ${address}\n`;
+            text += `---------------------------\n`;
+
+            cart.forEach(item => {
+                text += `• ${item.name} (عدد ${item.qty}) -> ${item.price * item.qty} ج.م\n`;
+            });
+
+            text += `---------------------------\n`;
+            text += `💰 *الإجمالي:* ${totalPrice} ج.م`;
+
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+            cart = [];
+            updateCartUI();
+            closeCart();
+            renderAdminDashboard();
+        }
+
+        // ADMIN DASHBOARD LOGIC
+        function toggleAdminView() {
+            if (!isAdminLoggedIn) {
+                const pass = prompt("برجاء إدخال كلمة سر لوحة التحكم (افتراضي: 1234):");
+                if (pass === "1234") {
+                    isAdminLoggedIn = true;
+                    switchView('admin');
+                } else {
+                    alert("كلمة السر خاطئة!");
+                }
+            } else {
+                switchView('admin');
+            }
+        }
+
+        function switchView(view) {
+            if (view === 'admin') {
+                document.getElementById('customer-view').style.display = 'none';
+                document.getElementById('admin-view').style.display = 'block';
+                document.getElementById('cart-nav-btn').style.display = 'none';
+                document.getElementById('view-toggle-btn').innerText = "عرض المتجر";
+                document.getElementById('view-toggle-btn').onclick = () => switchView('customer');
+                renderAdminDashboard();
+            } else {
+                document.getElementById('customer-view').style.display = 'block';
+                document.getElementById('admin-view').style.display = 'none';
+                document.getElementById('cart-nav-btn').style.display = 'flex';
+                document.getElementById('view-toggle-btn').innerText = "لوحة التحكم";
+                document.getElementById('view-toggle-btn').onclick = toggleAdminView;
+            }
+        }
+
+        function renderAdminDashboard() {
+            // Stats
+            const revenue = orders.reduce((acc, o) => acc + o.total, 0);
+            document.getElementById('stat-revenue').innerText = `${revenue} ج.م`;
+            document.getElementById('stat-orders-count').innerText = orders.length;
+            document.getElementById('stat-products-count').innerText = products.length;
+
+            // Products Table
+            const prodTable = document.getElementById('admin-products-table');
+            prodTable.innerHTML = '';
+            products.forEach(p => {
+                prodTable.innerHTML += `
+                    <tr>
+                        <td><img src="${p.img}" width="45" height="45" style="border-radius: 8px; object-fit: cover;"></td>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${p.category}</td>
+                        <td>${p.price} ج.م</td>
+                        <td><button class="action-btn btn-delete" onclick="deleteProduct(${p.id})">حذف</button></td>
+                    </tr>
+                `;
+            });
+
+            // Orders Table
+            const orderTable = document.getElementById('admin-orders-table');
+            orderTable.innerHTML = '';
+            orders.forEach(o => {
+                orderTable.innerHTML += `
+                    <tr>
+                        <td><strong>${o.id}</strong></td>
+                        <td>${o.customer}</td>
+                        <td>${o.address}</td>
+                        <td><strong style="color: var(--accent);">${o.total} ج.م</strong></td>
+                        <td>${o.time}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const price = parseFloat(document.getElementById('prod-price').value);
+            const category = document.getElementById('prod-category').value;
+            const img = document.getElementById('prod-img').value;
+            const desc = document.getElementById('prod-desc').value;
+
+            const newProd = {
+                id: Date.now(),
+                name,
+                price,
+                category,
+                img,
+                desc,
+                tag: 'جديد 🌟'
+            };
+
+            products.unshift(newProd);
+            localStorage.setItem('alhourani_products', JSON.stringify(products));
+            alert('تمت إضافة المنتج بنجاح!');
+            document.getElementById('add-product-form').reset();
+            renderAdminDashboard();
+            renderMenu(products);
+        }
+
+        function deleteProduct(id) {
+            if (confirm("هل أنت تأكد من حذف هذا المنتج؟")) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('alhourani_products', JSON.stringify(products));
+                renderAdminDashboard();
+                renderMenu(products);
+            }
+        }
+
+        // Init
+        renderMenu(products);
+    </script>
+</body>
+</html>
